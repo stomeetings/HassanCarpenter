@@ -26,7 +26,15 @@ export default function AboutSection() {
           </h2>
           <p className="mt-4 text-muted md:text-lg">
             Expert hand-crafted furniture, modular kitchens, solid wood doors, and careful polish and repair —
-            all built to your measurements and delivered on time.
+            built to your measurements with complete cooperation until 100% client satisfaction.
+          </p>
+          <p
+            lang="ur"
+            dir="rtl"
+            className="mt-3 text-left font-bold leading-[2] text-amber-700"
+            style={{ fontFamily: "'Noto Nastaliq Urdu', serif", fontSize: 'clamp(14px, 3.8vw, 18px)' }}
+          >
+            راولپنڈی اور اسلام آباد میں لکڑی کا معیاری کام — مکمل تعاون اور اس وقت تک تسلی بخش کام جب تک آپ 100% مطمئن نہ ہو جائیں!
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {HIGHLIGHTS.map(({ Icon, title, text }) => (
