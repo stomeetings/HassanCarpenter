@@ -9,7 +9,6 @@ import Lightbox from './Lightbox.jsx'
 const TABS = [
   { value: 'all', label: 'All' },
   ...CATEGORIES,
-  { value: 'videos', label: '▶ Videos' },
 ]
 
 const filterFromHash = () => {
@@ -48,7 +47,6 @@ export default function Gallery() {
   const items = useMemo(() => {
     if (!rows) return []
     if (filter === 'all') return rows
-    if (filter === 'videos') return rows.filter((r) => r.video_url)
     return rows.filter((r) => r.category === filter)
   }, [rows, filter])
 

@@ -4,6 +4,7 @@ import AboutSection from '../components/AboutSection.jsx'
 import MapSection from '../components/MapSection.jsx'
 import Services from '../components/Services.jsx'
 import Gallery from '../components/Gallery.jsx'
+import VideoGallery from '../components/VideoGallery.jsx'
 import Footer from '../components/Footer.jsx'
 import MobileCtaBar from '../components/MobileCtaBar.jsx'
 import { CallButton, WhatsAppButton } from '../components/CtaButtons.jsx'
@@ -17,6 +18,7 @@ export default function HomePage() {
         <AboutSection />
         <Services />
         <Gallery />
+        <VideoGallery />
         <MapSection />
         <section className="bg-navy py-16 text-center text-white">
           <div className="mx-auto max-w-2xl px-4">
