@@ -91,13 +91,17 @@ export default function Gallery() {
                 className="group overflow-hidden rounded-xl border border-line bg-white text-left shadow-sm hover:shadow-md"
               >
                 <div className="relative aspect-square overflow-hidden bg-soft">
-                  <img
-                    src={p.image_url ?? youtubeThumb(p.video_url)}
-                    alt={p.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                  />
+                  {p.image_url || youtubeThumb(p.video_url) ? (
+                    <img
+                      src={p.image_url ?? youtubeThumb(p.video_url)}
+                      alt={p.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  ) : (
+                    <video src={`${p.video_url}#t=0.1`} preload="metadata" muted playsInline className="h-full w-full object-cover" />
+                  )}
                   {p.video_url && (
                     <span className="absolute inset-0 grid place-items-center">
                       <span className="rounded-full bg-white/90 p-3 text-navy"><Play size={22} aria-hidden="true" /></span>

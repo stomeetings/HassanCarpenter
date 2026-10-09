@@ -1,11 +1,26 @@
 import { useState } from 'react'
 import { ImageOff, Play } from 'lucide-react'
-import { youtubeId, youtubeThumb } from '../lib/media.js'
+import { isFileVideo, youtubeId, youtubeThumb } from '../lib/media.js'
 
 // Facade: no iframe (and no YouTube JS) until the user taps play.
+// Uploaded files render in a native <video>.
 export default function YouTubeEmbed({ url, title = 'Project video', autoplay = false }) {
   const [playing, setPlaying] = useState(false)
   const id = youtubeId(url)
+
+  if (isFileVideo(url)) {
+    return (
+      <video
+        src={url}
+        title={title}
+        controls
+        playsInline
+        preload="metadata"
+        autoPlay={autoplay}
+        className="aspect-video w-full rounded-xl bg-black"
+      />
+    )
+  }
 
   if (!id) {
     return (

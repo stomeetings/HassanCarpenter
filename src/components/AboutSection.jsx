@@ -10,13 +10,13 @@ export default function AboutSection() {
     <section id="about" className="bg-white py-16 md:py-24">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14 md:px-6">
         {/* TODO(owner): add public/about.webp; blank frame if missing */}
-        <div className="aspect-[4/3] overflow-hidden rounded-2xl border-4 border-line bg-soft shadow-sm">
+        <div className="min-h-48 w-full max-w-md justify-self-center overflow-hidden md:max-w-none rounded-2xl border-4 border-line bg-soft shadow-sm">
           <img
             src="/about.webp"
             alt="Hassan Wood Worker workshop"
             loading="lazy"
             onError={(e) => { e.currentTarget.style.display = 'none' }}
-            className="h-full w-full object-cover"
+            className="mx-auto block h-auto max-h-[80vh] w-full object-contain"
           />
         </div>
         <div>

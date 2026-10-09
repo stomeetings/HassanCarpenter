@@ -6,7 +6,13 @@ create table public.projects (
   title       text not null check (char_length(title) between 1 and 120),
   description text check (char_length(description) <= 1000),
   image_url   text,
-  video_url   text check (video_url ~ '^https://(www\.|m\.)?(youtube\.com|youtu\.be)/'),
+  video_url   text check (video_url ~ '^https://(www\.|m\.)?(youtube\.com|youtu\.be)/'
+                       or video_url ~ '^https://[^/]+/storage/v1/object/public/portfolio-images/videos/'),
+  -- Existing project? Run:
+  -- alter table public.projects drop constraint projects_video_url_check;
+  -- alter table public.projects add constraint projects_video_url_check check (
+  --   video_url ~ '^https://(www\.|m\.)?(youtube\.com|youtu\.be)/'
+  --   or video_url ~ '^https://[^/]+/storage/v1/object/public/portfolio-images/videos/');
   category    text not null check (category in ('kitchen','furniture','doors','repair')),
   created_at  timestamptz not null default now(),
   constraint projects_has_media check (image_url is not null or video_url is not null)
@@ -29,8 +35,12 @@ create policy "projects_admin_write"
 
 -- Storage
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('portfolio-images', 'portfolio-images', true, 2097152,
-        array['image/webp','image/jpeg','image/png']);
+values ('portfolio-images', 'portfolio-images', true, 52428800, -- 50 MB (videos)
+        array['image/webp','image/jpeg','image/png','video/mp4','video/webm','video/quicktime']);
+-- Existing project? Run instead:
+-- update storage.buckets set file_size_limit = 52428800,
+--   allowed_mime_types = array['image/webp','image/jpeg','image/png','video/mp4','video/webm','video/quicktime']
+--   where id = 'portfolio-images';
 
 create policy "portfolio_images_admin_write"
   on storage.objects for all

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Pencil, Play, Trash2 } from 'lucide-react'
 import { supabase } from '../../lib/supabase.js'
 import { CATEGORIES, categoryLabel } from '../../lib/config.js'
-import { storagePathFromUrl, youtubeThumb } from '../../lib/media.js'
+import { isFileVideo, storagePathFromUrl, youtubeThumb } from '../../lib/media.js'
 
 export default function ProjectList({ projects, onEdit, onChanged }) {
   const [filter, setFilter] = useState('all')
@@ -13,7 +13,8 @@ export default function ProjectList({ projects, onEdit, onChanged }) {
     if (!confirm(`Delete "${p.title}"? This cannot be undone.`)) return
     const { error } = await supabase.from('projects').delete().eq('id', p.id)
     if (error) return setError(error.message)
-    if (p.image_url) supabase.storage.from('portfolio-images').remove([storagePathFromUrl(p.image_url)]).catch(console.error)
+    const paths = [p.image_url, isFileVideo(p.video_url) && p.video_url].filter(Boolean).map(storagePathFromUrl).filter(Boolean)
+    if (paths.length) supabase.storage.from('portfolio-images').remove(paths).catch(console.error)
     setError('')
     onChanged()
   }
@@ -36,7 +37,11 @@ export default function ProjectList({ projects, onEdit, onChanged }) {
         <ul className="divide-y divide-line rounded-xl border border-line bg-white">
           {shown.map((p) => (
             <li key={p.id} className="flex items-center gap-3 p-3">
-              <img src={p.image_url ?? youtubeThumb(p.video_url)} alt="" className="size-16 shrink-0 rounded-lg bg-soft object-cover" />
+              {p.image_url || youtubeThumb(p.video_url) ? (
+                <img src={p.image_url ?? youtubeThumb(p.video_url)} alt="" className="size-16 shrink-0 rounded-lg bg-soft object-cover" />
+              ) : (
+                <video src={`${p.video_url}#t=0.1`} preload="metadata" muted playsInline className="size-16 shrink-0 rounded-lg bg-soft object-cover" />
+              )}
               <div className="min-w-0 flex-1">
                 <p className="truncate font-semibold">{p.title}</p>
                 <p className="flex items-center gap-1 text-sm text-muted">

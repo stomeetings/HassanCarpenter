@@ -8,6 +8,9 @@ export const youtubeThumb = (url) => {
   return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null
 }
 
+// Uploaded video files live in storage; anything else in video_url is a YouTube link.
+export const isFileVideo = (url) => !!url && !youtubeId(url)
+
 export const storagePathFromUrl = (url) => url?.split('/portfolio-images/')[1] ?? null
 
 // Resize to max 1600px and re-encode as WebP via canvas (phone photos are 3-8 MB).

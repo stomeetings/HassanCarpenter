@@ -13,14 +13,22 @@ export default function Hero() {
         alt=""
         fetchPriority="high"
         onError={(e) => { e.currentTarget.style.display = 'none' }}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-navy/70" />
-      <div className="relative mx-auto w-full max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-6 md:px-6 md:py-8">
         <div className="max-w-2xl">
           <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
             Custom Kitchens &amp; Woodwork, Built to Last.
           </h1>
+          <p
+            lang="ur"
+            dir="rtl"
+            className="mt-2 whitespace-nowrap text-left font-bold leading-[1.9] text-amber-300"
+            style={{ fontFamily: "'Noto Nastaliq Urdu', serif", fontSize: 'clamp(10px, 3.2vw, 18px)' }}
+          >
+            لکڑی کا ہر کام — الماری، کچن، بیڈ، پالش، اور ڈورز — مکمل تسلی بخش کیا جاتا ہے۔
+          </p>
           <p className="mt-4 text-base text-white/85 md:text-lg">
             Premium carpentry services in {BUSINESS.city.replace(', Pakistan', '')} — hand-crafted furniture,
             modular kitchens, doors &amp; polish.
