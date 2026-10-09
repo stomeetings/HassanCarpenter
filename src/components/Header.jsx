@@ -1,4 +1,4 @@
-import { Images, Info, Video, Wrench } from 'lucide-react'
+import { Images, Info, Star, Video, Wrench } from 'lucide-react'
 import { BUSINESS } from '../lib/config.js'
 import { CallButton, WhatsAppButton } from './CtaButtons.jsx'
 
@@ -7,6 +7,7 @@ const NAV = [
   { href: '#services', label: 'Services', Icon: Wrench },
   { href: '#work', label: 'Work', Icon: Images },
   { href: '#videos', label: 'Videos', Icon: Video },
+  { href: '#reviews', label: 'Reviews', Icon: Star },
 ]
 
 export default function Header() {
