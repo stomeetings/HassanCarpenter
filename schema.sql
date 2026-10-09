@@ -1,0 +1,44 @@
+-- Run once in Supabase → SQL Editor.
+-- Before: Authentication → disable "Allow new users to sign up"; add the owner user manually.
+
+create table public.projects (
+  id          uuid primary key default gen_random_uuid(),
+  title       text not null check (char_length(title) between 1 and 120),
+  description text check (char_length(description) <= 1000),
+  image_url   text,
+  video_url   text check (video_url ~ '^https://(www\.|m\.)?(youtube\.com|youtu\.be)/'),
+  category    text not null check (category in ('kitchen','furniture','doors','repair')),
+  created_at  timestamptz not null default now(),
+  constraint projects_has_media check (image_url is not null or video_url is not null)
+);
+
+create index projects_created_at_idx on public.projects (created_at desc);
+
+alter table public.projects enable row level security;
+
+create policy "projects_public_read"
+  on public.projects for select
+  to anon, authenticated
+  using (true);
+
+create policy "projects_admin_write"
+  on public.projects for all
+  to authenticated
+  using      ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+-- Storage
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('portfolio-images', 'portfolio-images', true, 2097152,
+        array['image/webp','image/jpeg','image/png']);
+
+create policy "portfolio_images_admin_write"
+  on storage.objects for all
+  to authenticated
+  using      (bucket_id = 'portfolio-images' and (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check (bucket_id = 'portfolio-images' and (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+-- Mark the owner as admin (then sign out/in so the JWT carries the claim).
+update auth.users
+set raw_app_meta_data = raw_app_meta_data || '{"role":"admin"}'
+where email = 'owner@example.com';  -- TODO(owner): real admin email
