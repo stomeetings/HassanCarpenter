@@ -12,7 +12,7 @@ export default function Footer() {
           <a href={telHref} className="block hover:text-white">{BUSINESS.phoneDisplay}</a>
           <a href={waHref()} target="_blank" rel="noopener noreferrer" className="block hover:text-white">WhatsApp</a>
         </div>
-        <p>{BUSINESS.city}</p>
+        <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">{BUSINESS.city}</a>
       </div>
       <p className="mx-auto mt-8 max-w-6xl px-4 md:px-6">© {new Date().getFullYear()} {BUSINESS.name}</p>
     </footer>

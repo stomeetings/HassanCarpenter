@@ -1,5 +1,7 @@
 import Header from '../components/Header.jsx'
 import Hero from '../components/Hero.jsx'
+import AboutSection from '../components/AboutSection.jsx'
+import MapSection from '../components/MapSection.jsx'
 import Services from '../components/Services.jsx'
 import Gallery from '../components/Gallery.jsx'
 import Footer from '../components/Footer.jsx'
@@ -12,8 +14,10 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <AboutSection />
         <Services />
         <Gallery />
+        <MapSection />
         <section className="bg-navy py-16 text-center text-white">
           <div className="mx-auto max-w-2xl px-4">
             <h2 className="text-2xl font-bold md:text-4xl">Ready to start your project?</h2>
