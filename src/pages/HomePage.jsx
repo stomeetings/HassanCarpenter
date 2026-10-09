@@ -2,6 +2,7 @@ import Header from '../components/Header.jsx'
 import Hero from '../components/Hero.jsx'
 import AboutSection from '../components/AboutSection.jsx'
 import AreasServed from '../components/AreasServed.jsx'
+import Reviews from '../components/Reviews.jsx'
 import MapSection from '../components/MapSection.jsx'
 import Services from '../components/Services.jsx'
 import Gallery from '../components/Gallery.jsx'
@@ -20,6 +21,7 @@ export default function HomePage() {
         <Services />
         <Gallery />
         <VideoGallery />
+        <Reviews />
         <AreasServed />
         <MapSection />
         <section className="bg-navy py-16 text-center text-white">

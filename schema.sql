@@ -33,6 +33,30 @@ create policy "projects_admin_write"
   using      ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
   with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
 
+-- Customer reviews (managed in Admin → Reviews)
+create table public.reviews (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null check (char_length(name) between 1 and 80),
+  place      text not null check (char_length(place) between 1 and 80),
+  rating     int  not null check (rating between 1 and 5),
+  work       text check (char_length(work) <= 120),
+  text       text not null check (char_length(text) between 1 and 1000),
+  created_at timestamptz not null default now()
+);
+
+alter table public.reviews enable row level security;
+
+create policy "reviews_public_read"
+  on public.reviews for select
+  to anon, authenticated
+  using (true);
+
+create policy "reviews_admin_write"
+  on public.reviews for all
+  to authenticated
+  using      ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
 -- Storage
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('portfolio-images', 'portfolio-images', true, 52428800, -- 50 MB (videos)

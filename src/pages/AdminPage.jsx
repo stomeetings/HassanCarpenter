@@ -6,6 +6,7 @@ import { BUSINESS } from '../lib/config.js'
 import LoginForm from '../components/admin/LoginForm.jsx'
 import ProjectList from '../components/admin/ProjectList.jsx'
 import ProjectForm from '../components/admin/ProjectForm.jsx'
+import ReviewsAdmin from '../components/admin/ReviewsAdmin.jsx'
 
 export default function AdminPage() {
   return (
@@ -37,6 +38,7 @@ function Dashboard() {
   const [projects, setProjects] = useState([])
   const [editing, setEditing] = useState(null) // null closed, {} new, row edit
   const [error, setError] = useState('')
+  const [tab, setTab] = useState('projects')
 
   const reload = useCallback(async () => {
     const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
@@ -58,6 +60,15 @@ function Dashboard() {
         </div>
       </header>
       <main className="mx-auto max-w-4xl px-4 py-6">
+        <div role="tablist" className="mb-4 flex gap-2">
+          {[['projects', 'Projects'], ['reviews', 'Reviews']].map(([v, label]) => (
+            <button key={v} type="button" role="tab" aria-selected={tab === v} onClick={() => setTab(v)}
+              className={`min-h-11 rounded-full px-5 font-semibold ${tab === v ? 'bg-brand text-white' : 'border border-line bg-white'}`}>
+              {label}
+            </button>
+          ))}
+        </div>
+        {tab === 'reviews' ? <ReviewsAdmin /> : <>
         <div className="mb-4 flex items-center justify-between">
           <h1 className="text-xl font-bold">Projects ({projects.length})</h1>
           <button onClick={() => setEditing({})} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-brand px-5 font-semibold text-white hover:bg-brand-dark">
@@ -66,6 +77,7 @@ function Dashboard() {
         </div>
         {error && <p role="alert" className="mb-3 text-danger">{error}</p>}
         <ProjectList projects={projects} onEdit={setEditing} onChanged={reload} />
+        </>}
       </main>
       <ProjectForm
         project={editing}
