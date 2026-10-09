@@ -60,6 +60,14 @@ Sab changes jo is session mein kiye gaye. (Maine kisi bhi change ke baad `npm ru
 - Single line (`whitespace-nowrap`), chota font `clamp(10px, 3.2vw, 18px)`, `text-left`.
 - Hero ki upar/neeche ki jagah kam: `py-6 md:py-8`; Urdu line ka gap/line-height kam.
 
+## 8. SEO (index.html, sitemap, robots, vercel.json)
+- `index.html`: naya title ("Carpenter in Rawalpindi & Islamabad | Hassan Carpenter & Wood Work"), description, canonical (`https://hassan-carpenter.vercel.app/`), Open Graph + Twitter card (image `/about.webp` placeholder), Google verification tag, `<noscript>` fallback text, favicon typo fix, font sirf weight 700.
+- JSON-LD LocalBusiness: name "Hassan Carpenter", alternateName (Hassan Wood Work waghera), url, image, address Pakistan Town Islamabad, har area/sector alag `areaServed`, services. `sameAs` skip (koi social link nahi).
+- `public/sitemap.xml` (sirf `/`), `public/robots.txt` mein Sitemap line, `vercel.json` mein `/admin` par `X-Robots-Tag: noindex, nofollow`.
+- Brand naam `Hassan Carpenter` (`src/lib/config.js`, map title, About alt); Hero H1 aur text mein Rawalpindi/Islamabad; Services images ke descriptive alt + width/height.
+- Naya `src/components/AreasServed.jsx` ("Carpenter Services Across Rawalpindi & Islamabad", areas ki list) — `HomePage.jsx` mein Map se pehle.
+- TV media wall site par nahi likha (aap ne skip kaha).
+
 ## Baqi kaam / dhyan dene wali baatein
 - `npm run build` chalana baqi hai.
 - Bohat chhoti screen par Urdu font 10px ho jata hai — parhne mein mushkil ho to bata dein.

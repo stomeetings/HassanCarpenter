@@ -26,7 +26,9 @@ export default function Services() {
                 </span>
                 <img
                   src={image}
-                  alt=""
+                  alt={`${title} in Rawalpindi and Islamabad`}
+                  width="1200"
+                  height="900"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => { e.currentTarget.style.display = 'none' }}

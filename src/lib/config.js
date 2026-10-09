@@ -1,9 +1,9 @@
 export const BUSINESS = {
-  name: 'Hassan Wood Worker',
+  name: 'Hassan Carpenter',
   phone: '+923015734282',
   phoneDisplay: '03015734282',
   whatsapp: '923015734282', // digits only, no +
-  whatsappText: 'Hi Hassan Wood Worker, I need a quote',
+  whatsappText: 'Hi Hassan Carpenter, I need a quote',
   email: 'owner@example.com', // TODO(owner)
   city: 'Rawalpindi & Islamabad, Pakistan',
   mapsUrl:

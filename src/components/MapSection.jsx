@@ -9,7 +9,7 @@ export default function MapSection() {
         <p className="mb-8 text-center text-muted">{BUSINESS.city}</p>
         <div className="aspect-[4/3] overflow-hidden rounded-xl border border-line bg-white md:aspect-[21/9]">
           <iframe
-            title="Hassan Wood Worker on Google Maps"
+            title="Hassan Carpenter on Google Maps"
             src={`https://maps.google.com/maps?q=${BUSINESS.lat},${BUSINESS.lng}&z=16&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

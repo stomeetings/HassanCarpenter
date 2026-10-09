@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-4 py-6 md:px-6 md:py-8">
         <div className="max-w-2xl">
           <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
-            Custom Kitchens &amp; Woodwork, Built to Last.
+            Hassan Carpenter — Custom Kitchens &amp; Woodwork in Rawalpindi &amp; Islamabad
           </h1>
           <p
             lang="ur"
@@ -30,8 +30,8 @@ export default function Hero() {
             لکڑی کا ہر کام — الماری، کچن، بیڈ، پالش، اور ڈورز — مکمل تسلی بخش کیا جاتا ہے۔
           </p>
           <p className="mt-4 text-base text-white/85 md:text-lg">
-            Premium carpentry services in {BUSINESS.city.replace(', Pakistan', '')} — hand-crafted furniture,
-            modular kitchens, doors &amp; polish.
+            Professional carpenter and wood worker in {BUSINESS.city.replace(', Pakistan', '')} — kitchen cabinets,
+            wooden wardrobes, hand-crafted furniture, doors &amp; polish.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <CallButton label={`Call ${BUSINESS.phoneDisplay}`} className="w-full sm:w-auto" />
